@@ -12,11 +12,11 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 animate-fade-in">
-          Building Excellence,<br />Delivering Trust
+        <h1 className="text-5xl md:text-5xl font-bold text-primary-foreground mb-6 animate-fade-in">
+          Best Contractors<br />In Kurunegala
         </h1>
-        <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          Premier construction solutions with decades of experience in infrastructure development
+        <p className="text-xl md:text-1xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          20+ Decades of Excellence In Construction Field.
         </p>
         <Button 
           size="lg" 
