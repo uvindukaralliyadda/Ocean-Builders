@@ -5,13 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import ContactImage from "@/assets/Contact_Image.jpg";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, { message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
-  email: z.string().trim().email({ message: "Invalid email address" }).max(255, { message: "Email must be less than 255 characters" }),
-  phone: z.string().trim().min(1, { message: "Phone is required" }).max(20, { message: "Phone must be less than 20 characters" }),
-  projectType: z.string().trim().min(1, { message: "Project type is required" }).max(100, { message: "Project type must be less than 100 characters" }),
-  message: z.string().trim().min(1, { message: "Message is required" }).max(1000, { message: "Message must be less than 1000 characters" })
+  name: z.string().trim().min(1, { message: "Name is required" }).max(100),
+  email: z.string().trim().email({ message: "Invalid email address" }).max(255),
+  phone: z.string().trim().min(1, { message: "Phone is required" }).max(20),
+  projectType: z.string().trim().min(1, { message: "Project type is required" }).max(100),
+  message: z.string().trim().min(1, { message: "Message is required" }).max(1000)
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -31,7 +32,6 @@ const Contact = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name as keyof ContactFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -43,18 +43,15 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Validate form data
-      const validatedData = contactSchema.parse(formData);
+      contactSchema.parse(formData);
 
-      // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       toast({
         title: "Message Sent!",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 24 hours."
       });
 
-      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -65,7 +62,7 @@ const Contact = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
-        error.errors.forEach((err) => {
+        error.errors.forEach(err => {
           if (err.path[0]) {
             fieldErrors[err.path[0] as keyof ContactFormData] = err.message;
           }
@@ -84,48 +81,56 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground mb-4">
+    <section
+      id="contact"
+      className="py-20 relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${ContactImage})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Content */}
+      <div className="relative container mx-auto px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-4">
           Get In Touch
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
           Ready to start your project? Contact us today for a consultation
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-8 bg-black/30 p-6 rounded-lg">
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-12 h-12 bg-[#100C08] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                    <p className="text-muted-foreground">+94 71 800 1467</p>
+                    <h4 className="font-semibold text-white mb-1">Phone</h4>
+                    <p className="text-gray-300">+94 71 800 1467</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-12 h-12 bg-[#100C08] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Email</h4>
-                    <p className="text-muted-foreground">oceanbuilders@yahoo.com</p>
+                    <h4 className="font-semibold text-white mb-1">Email</h4>
+                    <p className="text-gray-300">oceanbuilders@yahoo.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-primary-foreground" />
+                  <div className="w-12 h-12 bg-[#100C08] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Office Location</h4>
-                    <p className="text-muted-foreground">
+                    <h4 className="font-semibold text-white mb-1">Office Location</h4>
+                    <p className="text-gray-300">
                       3rd Mile Post,<br />
                       Maraluwawa, Kurunegala<br />
                       Sri Lanka
@@ -135,17 +140,17 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-section-bg p-6 rounded-lg">
-              <h4 className="font-semibold text-foreground mb-2">Business Hours</h4>
-              <p className="text-muted-foreground">Monday - Friday: 8:00 AM - 6:00 PM</p>
-              <p className="text-muted-foreground">Saturday: 9:00 AM - 4:00 PM</p>
-              <p className="text-muted-foreground">Sunday: Closed</p>
+            <div className="bg-black/30 p-6 rounded-lg">
+              <h4 className="font-semibold text-white mb-2">Business Hours</h4>
+              <p className="text-gray-300">Monday - Friday: 8:00 AM - 6:00 PM</p>
+              <p className="text-gray-300">Saturday: 9:00 AM - 4:00 PM</p>
+              <p className="text-gray-300">Sunday: Closed</p>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="bg-card rounded-lg p-8 shadow-lg">
-            <h3 className="text-2xl font-bold text-card-foreground mb-6">Send Us a Message</h3>
+          <div className="bg-black/30 rounded-lg p-8 shadow-lg">
+            <h3 className="text-2xl font-bold text-white mb-6">Send Us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Input
@@ -216,7 +221,7 @@ const Contact = () => {
 
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="w-full bg-[#100C08] hover:bg-[#100C08]/90 text-white font-semibold px-8 py-6 text-lg transition-all hover:scale-105"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
