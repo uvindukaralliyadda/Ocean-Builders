@@ -155,7 +155,7 @@ const Contact = () => {
               <div>
                 <Input
                   name="name"
-                  placeholder="Your Name *"
+                  placeholder="Full Name "
                   value={formData.name}
                   onChange={handleChange}
                   className={errors.name ? "border-destructive" : ""}
@@ -169,7 +169,7 @@ const Contact = () => {
                 <Input
                   name="email"
                   type="email"
-                  placeholder="Email Address *"
+                  placeholder="Email Address "
                   value={formData.email}
                   onChange={handleChange}
                   className={errors.email ? "border-destructive" : ""}
@@ -182,7 +182,7 @@ const Contact = () => {
               <div>
                 <Input
                   name="phone"
-                  placeholder="Phone Number *"
+                  placeholder="Phone Number "
                   value={formData.phone}
                   onChange={handleChange}
                   className={errors.phone ? "border-destructive" : ""}
@@ -195,7 +195,7 @@ const Contact = () => {
               <div>
                 <Input
                   name="projectType"
-                  placeholder="Project Type (e.g., Building, Highway, Bridge) *"
+                  placeholder="Project Type (e.g., Building, Highway, Bridge) "
                   value={formData.projectType}
                   onChange={handleChange}
                   className={errors.projectType ? "border-destructive" : ""}
@@ -208,7 +208,7 @@ const Contact = () => {
               <div>
                 <Textarea
                   name="message"
-                  placeholder="Tell us about your project *"
+                  placeholder="Tell us about your project "
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}

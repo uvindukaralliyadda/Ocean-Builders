@@ -16,7 +16,7 @@ const Hero = () => {
           Best Contractors<br />In Kurunegala
         </h1>
         <p className="text-xl md:text-1xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          20+ Decades of Excellence In Construction Field.
+          20+ Years of Excellence In Construction Field.
         </p>
         <Button
             size="lg"
