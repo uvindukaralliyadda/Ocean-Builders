@@ -20,10 +20,10 @@ const Hero = () => {
         </p>
         <Button 
           size="lg" 
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg animate-fade-in transition-all hover:scale-105"
+          className="bg-[#100C08] hover:bg-[#100C08]/90 text-white font-semibold px-8 py-6 text-lg animate-fade-in transition-all hover:scale-105"
           style={{ animationDelay: "0.4s" }}
         >
-          Contact
+          Learn More
         </Button>
       </div>
     </section>
